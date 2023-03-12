@@ -1,0 +1,23 @@
+{
+  "name": "form-backend",
+  "version": "1.0.0",
+  "description": "this is backend repo for form",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --watch app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zwoong/form-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zwoong/form-backend/issues"
+  },
+  "homepage": "https://github.com/zwoong/form-backend#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
