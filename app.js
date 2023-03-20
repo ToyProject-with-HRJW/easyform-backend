@@ -1,18 +1,10 @@
-import express from 'express';
-import authRouter from './src/routes/auth.js';
-import cors from 'cors';
-
-const app = express();
-app.use(express.json());
-
-app.use('/auth', authRouter);
-app.use(cors());
-app.use(express.urlencoded({ extended: true }));
+var express = require('express');
+var app = express();
 
 app.get('/', (req, res) => {
-    res.send("ok");
+    res.send(200);
 });
 
 app.listen(3000, function(){
-    console.log("server has started on port 3000")
+    console.log("Express server has started on port 3000")
 })
