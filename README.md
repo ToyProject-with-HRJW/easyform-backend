@@ -21,22 +21,18 @@ yarn start
 ## directory structure
 
 ```
-/app        
-├── config/ 
-│   ├── local.env
-│   ├── prod.env
-├── database/
-│   ├── Mysql.database.js
-│   ├── Mongo.database.js
-│   ├── init.js
-├── routes/
-│   ├── App.routes.js
-│   ├── Auth.routes.js
-├── utils/
-├── middleware/
-├── models/
-├── controllers/
-└───services/
-/app.js
-/package.json
+form-backend
+├─ .github
+├─ .gitignore
+├─ README.md
+├─ app.js
+├─ package.json
+├─ src
+│  ├─ config
+│  ├─ controllers
+│  ├─ databases
+│  ├─ middlewares
+│  ├─ routes
+│  └─ utils
+└─ yarn.lock
 ```
