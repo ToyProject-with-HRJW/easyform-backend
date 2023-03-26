@@ -1,14 +1,7 @@
 import express from 'express';
 import authRouter from './src/routes/auth.js';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import path from 'path'
-
-if (process.env.NODE_ENV === 'local') {
-    dotenv.config({ path: path.join(path.resolve(), 'src/config/.env.local') })
-} else if (process.env.NODE_ENV === 'prod') {
-    dotenv.config({ path: path.join(path.resolve(), 'src/config/.env.prod') })
-} 
+import './src/databases/mysql.js';
+import cors from 'cors'; 
 
 const app = express();
 app.use(express.json());
