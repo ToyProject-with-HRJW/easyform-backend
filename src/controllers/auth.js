@@ -1,5 +1,5 @@
 async function getToken(req, res) {
-    console.log("controller init!")
+    res.json(200)
 }
 
 export { getToken };

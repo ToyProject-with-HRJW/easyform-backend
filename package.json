@@ -25,7 +25,9 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mysql2": "^3.2.0",
-    "sequelize": "^6.30.0"
+    "sequelize": "^6.30.0",
+    "swagger-ui-express": "^4.6.2",
+    "yamljs": "^0.3.0"
   },
   "type": "module"
 }
