@@ -10,6 +10,16 @@ export default (sequelize, DataTypes) => {
             allowNull: false,
             comment: "유저 이메일",
         },
+        nickname: {
+            type: DataTypes.STRING(32),
+            allowNull: true,
+            comment: "유저 닉네임",
+        },
+        icon: {
+            type: DataTypes.STRING(512),
+            allowNull: true,
+            comment: "유저 아이콘",
+        },
         signupPlatform: {
             type: DataTypes.STRING(32),
             allowNull: false,
