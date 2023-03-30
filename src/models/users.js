@@ -12,7 +12,7 @@ export default (sequelize, DataTypes) => {
         allowNull: false,
         comment: "유저 이메일",
       },
-      nickname: {
+      nickName: {
         type: DataTypes.STRING(32),
         allowNull: false,
         comment: "유저 닉네임",
@@ -32,7 +32,7 @@ export default (sequelize, DataTypes) => {
       indexes: [
         {
           unique: true,
-          fields: ["email", "signupPlatform"],
+          fields: ["email"],
         },
       ],
     }
