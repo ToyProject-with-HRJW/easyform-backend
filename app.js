@@ -1,6 +1,6 @@
 import express from 'express';
 import authRouter from './src/routes/auth.js';
-import './src/databases/mysql.js';
+import './src/models/index.js';
 import cors from 'cors'; 
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
