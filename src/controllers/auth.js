@@ -24,8 +24,6 @@ async function getGoogleUserInfo(token) {
 
 const socialHandler = {
   GOOGLE: getGoogleUserInfo,
-  // NAVER: getNaverUserInfo,
-  // KAKAO: getKakaoUserInfo,
 };
 async function getToken(req, res) {
   const { type, token } = req.body;
@@ -56,7 +54,7 @@ async function getToken(req, res) {
     const data = { accessToken, refreshToken };
     res.json(resFormat(SUCCESS, data));
   } catch (err) {
-    console.error(err.toString());
+    console.error("err : ", err.toString());
     res.status(500);
   }
 }
