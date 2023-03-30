@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(YAML.load("src/swagger/swagger.yaml")))
 
-app.get('/', (res) => {
+app.get('/', (req, res) => {
     res.send("ok");
 });
 
