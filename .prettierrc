@@ -3,7 +3,7 @@
     "trailingComma": "es5",
 
     // 들여쓰기 할 때, 기본 폭을 설정한다.
-    "tabWidth": 4,
+    "tabWidth": 2,
 
     // 모든 구문에 세미콜론을 붙인다.
     "semi": true,
