@@ -23,7 +23,7 @@ paths:
               properties:
                 type:        
                   type: string
-                  enum: [google, kakao, naver]
+                  enum: [GOOGLE, KAKAO, NAVER]
                 token:
                   type: string
               required:
@@ -31,31 +31,26 @@ paths:
                 - token
       responses:
         '200':
-          description: Successful operation
+          description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/200'    
+                $ref: '#/components/responses'    
         '400':
-          description: Missing the type or token field or sending an incorrect type
+          description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/responses/400'
+                $ref: '#/components/responses'
 
 components:
  responses:
-    200:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: The user ID.
-          example: 0
-    400:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: 1 or 2
-          example: 1
+    type: object
+    properties:
+      message:
+        type: string
+        description: response message
+      data:
+        type: object 
+        description: response data
+    
