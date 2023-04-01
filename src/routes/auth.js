@@ -1,4 +1,4 @@
-import express from 'express';
+import express from "express";
 import { validateToken } from "../middlewares/auth.js";
 import { getToken } from "../controllers/auth.js";
 
