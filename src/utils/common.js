@@ -34,8 +34,8 @@ async function generateAccessToken(ci) {
 async function generateRefreshToken(ci) {
   let payload = { ci, tokenFor: "refreshToken" };
   tokenOptions.expiresIn = "14d";
-  const accessToken = jwt.sign(payload, CRYPTO_TOKEN_KEY, tokenOptions);
-  return accessToken;
+  const refreshToken = jwt.sign(payload, CRYPTO_TOKEN_KEY, tokenOptions);
+  return refreshToken;
 }
 
 export {
