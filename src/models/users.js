@@ -22,10 +22,10 @@ export default (sequelize, DataTypes) => {
         allowNull: true,
         comment: "유저 아이콘",
       },
-      signupPlatform: {
-        type: DataTypes.STRING(32),
+      platformId: {
+        type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
-        comment: "유저정보 리소스 제공 플랫폼",
+        comment: "첫 회원가입시 사용한 SNS 플랫폼",
       },
     },
     {
@@ -33,6 +33,10 @@ export default (sequelize, DataTypes) => {
         {
           unique: true,
           fields: ["email"],
+        },
+        {
+          unique: true,
+          fields: ["nickName"],
         },
       ],
     }

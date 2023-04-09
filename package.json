@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start:local": "cross-env NODE_ENV=local node --watch app.js",
-    "start:prod": "cross-env NODE_ENV=prod node --watch app.js"
+    "start:prod": "cross-env NODE_ENV=prod node --watch app.js",
+    "sync:local": "cross-env NODE_ENV=local node src/utils/sync.js",
+    "sync:prod": "cross-env NODE_ENV=prod node src/utils/sync.js"
   },
   "repository": {
     "type": "git",

@@ -2,7 +2,7 @@ import { Sequelize, DataTypes } from "sequelize";
 import path from "path";
 import { fileURLToPath } from "url";
 import { readdirSync } from "fs";
-
+import association from "../utils/association.js";
 const { MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST } = process.env;
 
 const sequelize = new Sequelize(MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, {
@@ -26,9 +26,8 @@ try {
     const namedModel = model.default(db.sequelize, DataTypes);
     db[namedModel.name] = namedModel;
   }
+  association(db);
   console.log("connected database");
-
-  // await db.users.sync({ force: true });
 } catch (err) {
   console.error("occurred error in database connecting", err);
 }

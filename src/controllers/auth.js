@@ -8,6 +8,7 @@ import {
 } from "../utils/common.js";
 import { SNS_AUTH_FAILED, SUCCESS } from "../utils/consts.js";
 import db from "../models/index.js";
+import { snsEnum } from "../utils/enums.js";
 
 const { GOOGLE_AUTH_URL } = process.env;
 
@@ -45,7 +46,7 @@ async function getToken(req, res) {
         ci: await generateCi(result.email, type),
         email: result.email,
         nickName: await generateNickname(),
-        signupPlatform: type,
+        platformId: snsEnum[type],
       });
     }
     const accessToken = await generateAccessToken(row.ci);
