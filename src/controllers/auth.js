@@ -6,45 +6,60 @@ import {
   generateAccessToken,
   generateRefreshToken,
 } from "../utils/common.js";
+import { snsEnum } from "../utils/enums.js";
 import { SNS_AUTH_FAILED, SUCCESS } from "../utils/consts.js";
 import db from "../models/index.js";
-import { snsEnum } from "../utils/enums.js";
 
-const { GOOGLE_AUTH_URL } = process.env;
+const { GOOGLE_AUTH_URL, KAKAO_AUTH_URL, NAVER_AUTH_URL } = process.env;
 
-async function getGoogleUserInfo(token) {
-  const result = {};
-  const response = await fetch(GOOGLE_AUTH_URL + token);
-  const res = await response.json();
-
-  if (!res.error) {
-    result.email = res.email;
+async function getUserInfo(type, token) {
+  let response;
+  let email;
+  switch (type) {
+    case "GOOGLE":
+      response = await fetch(GOOGLE_AUTH_URL + token);
+      email = (await response.json()).email;
+      break;
+    case "KAKAO":
+      response = await fetch(KAKAO_AUTH_URL, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      email = (await response.json()).kakao_account?.email;
+      break;
+    case "NAVER":
+      response = await fetch(NAVER_AUTH_URL, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      email = (await response.json()).response?.email;
+      break;
   }
-  return result;
+
+  return email;
 }
 
-const socialHandler = {
-  GOOGLE: getGoogleUserInfo,
-};
 async function getToken(req, res) {
   const { type, token } = req.body;
   try {
-    const result = await socialHandler[type](token);
+    const result = await getUserInfo(type, token);
 
-    if (!result.email) {
+    if (!result) {
       res.status(400).json(resFormat(SNS_AUTH_FAILED));
       return;
     }
 
     let row = await db.users.findOne({
-      where: { email: result.email },
+      where: { email: result },
       raw: true,
     });
 
     if (!row) {
       row = await db.users.create({
-        ci: await generateCi(result.email, type),
-        email: result.email,
+        ci: await generateCi(result, type),
+        email: result,
         nickName: await generateNickname(),
         platformId: snsEnum[type],
       });
