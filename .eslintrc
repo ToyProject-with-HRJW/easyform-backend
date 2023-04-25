@@ -14,7 +14,7 @@
     "parserOptions": {
     
           // 자바스크립트 버전
-          "ecmaVersion": 8,
+          "ecmaVersion": 2020,
           
           // 모듈 export를 위해 import, export를 사용 가능여부를 설정
           "sourceType": "module",

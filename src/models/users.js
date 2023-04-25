@@ -32,7 +32,7 @@ export default (sequelize, DataTypes) => {
       indexes: [
         {
           unique: true,
-          fields: ["email"],
+          fields: ["email", "platformId"],
         },
         {
           unique: true,
