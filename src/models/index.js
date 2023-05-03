@@ -3,12 +3,13 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { readdirSync } from "fs";
 import association from "../utils/association.js";
-const { MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST } = process.env;
+const { MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST, MYSQL_PORT } =
+  process.env;
 
 const sequelize = new Sequelize(MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, {
   dialect: "mysql",
   host: MYSQL_HOST,
-  port: 3306,
+  port: MYSQL_PORT,
 });
 
 const db = { sequelize, Sequelize };
