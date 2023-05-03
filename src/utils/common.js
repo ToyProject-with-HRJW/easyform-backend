@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "./consts.js";
 const { CRYPTO_CI_KEY, CRYPTO_TOKEN_KEY } = process.env;
 
 const tokenOptions = {
@@ -25,14 +26,14 @@ async function generateNickname() {
 }
 
 async function generateAccessToken(ci) {
-  let payload = { ci, tokenFor: "accessToken" };
+  let payload = { ci, tokenFor: ACCESS_TOKEN };
   tokenOptions.expiresIn = "1h";
   const accessToken = jwt.sign(payload, CRYPTO_TOKEN_KEY, tokenOptions);
   return accessToken;
 }
 
 async function generateRefreshToken(ci) {
-  let payload = { ci, tokenFor: "refreshToken" };
+  let payload = { ci, tokenFor: REFRESH_TOKEN };
   tokenOptions.expiresIn = "14d";
   const refreshToken = jwt.sign(payload, CRYPTO_TOKEN_KEY, tokenOptions);
   return refreshToken;

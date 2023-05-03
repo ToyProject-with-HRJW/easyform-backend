@@ -51,13 +51,13 @@ async function getToken(req, res) {
       return;
     }
 
-    let row = await db.users.findOne({
+    let row = await db.user.findOne({
       where: { email: result },
       raw: true,
     });
 
     if (!row) {
-      row = await db.users.create({
+      row = await db.user.create({
         ci: await generateCi(result, type),
         email: result,
         nickName: await generateNickname(),

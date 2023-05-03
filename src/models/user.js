@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
   return sequelize.define(
-    "users",
+    "user",
     {
       ci: {
         type: DataTypes.STRING(64),
@@ -19,7 +19,6 @@ export default (sequelize, DataTypes) => {
       },
       icon: {
         type: DataTypes.STRING(512),
-        allowNull: true,
         comment: "유저 아이콘",
       },
       platformId: {

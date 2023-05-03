@@ -3,8 +3,9 @@ import db from "../models/index.js";
 
 await db.sequelize.query("SET FOREIGN_KEY_CHECKS = 0");
 
-await db.users.sync({ force: true });
 await db.manage_sns_platform.sync({ force: true });
+await db.user.sync({ force: true });
+await db.survey.sync({ force: true });
 
 await db.manage_sns_platform.bulkCreate([
   { name: "google" },
