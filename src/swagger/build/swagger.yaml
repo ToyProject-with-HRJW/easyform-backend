@@ -63,6 +63,60 @@ paths:
                       - $ref: '#/components/responses/SNS_AUTH_FAILED'
                   data:
                     type: object
+  /survey:
+    post:
+      tags:
+        - survey
+      security:
+        - bearerAuth: []
+      summary: Create a survey form
+      description: Create a survey form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                survey:
+                  type: object
+              required:
+                - survey
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    oneOf:
+                      - $ref: '#/components/responses/SUCCESS'
+                      - $ref: '#/components/responses/REISSUANCE_ACCESS_TOKEN'
+                  data:
+                    type: object
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    oneOf:
+                      - $ref: '#/components/responses/MISSING_REQUIRED_QUERY_PRAMETER'
+                  data:
+                    type: object
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    $ref: '#/components/responses/INVALID_TOKEN'
+                  data:
+                    type: object
 components:
   responses:
     SUCCESS:
@@ -77,3 +131,14 @@ components:
     SNS_AUTH_FAILED:
       type: string
       example: SNS_AUTH_FAILED
+    INVALID_TOKEN:
+      type: string
+      example: invalid token
+    REISSUANCE_ACCESS_TOKEN:
+      type: string
+      example: Reissuance of access token
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

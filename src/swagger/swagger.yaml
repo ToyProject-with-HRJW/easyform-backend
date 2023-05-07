@@ -9,8 +9,10 @@ tags:
   - name: auth
     description: Authentication related API
 paths:
-  $ref: './auth.yaml'
-
+  /auth/token:
+    $ref: './auth.token.yaml'
+  /survey:
+    $ref: './survey.yaml'
 
 components:
   responses:
@@ -26,3 +28,14 @@ components:
     SNS_AUTH_FAILED:
       type: string 
       example: SNS_AUTH_FAILED
+    INVALID_TOKEN:
+      type: string 
+      example: invalid token
+    REISSUANCE_ACCESS_TOKEN:
+      type: string 
+      example: Reissuance of access token
+  securitySchemes:
+    bearerAuth:           
+      type: http
+      scheme: bearer
+      bearerFormat: JWT   

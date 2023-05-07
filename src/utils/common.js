@@ -1,6 +1,11 @@
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "./consts.js";
+import {
+  ACCESS_TOKEN,
+  REFRESH_TOKEN,
+  INVALID_TOKEN,
+  REISSUANCE_ACCESS_TOKEN,
+} from "./consts.js";
 const { CRYPTO_CI_KEY, CRYPTO_TOKEN_KEY } = process.env;
 
 const tokenOptions = {
@@ -39,10 +44,31 @@ async function generateRefreshToken(ci) {
   return refreshToken;
 }
 
+async function checkToken(req, res, next) {
+  const bearerHeader = req.headers["authorization"];
+  if (typeof bearerHeader !== "undefined") {
+    const bearer = bearerHeader.split(" ");
+    const bearerToken = bearer[1];
+    try {
+      const verifyToken = jwt.verify(bearerToken, CRYPTO_TOKEN_KEY);
+      if (verifyToken.tokenFor === REFRESH_TOKEN) {
+        const data = { accessToken: await generateAccessToken(verifyToken.ci) };
+        res.json(resFormat(REISSUANCE_ACCESS_TOKEN, data));
+      }
+      req.ci = verifyToken.ci;
+      next();
+    } catch (error) {
+      res.status(401).json(resFormat(INVALID_TOKEN));
+    }
+  }
+  return 1;
+}
+
 export {
   resFormat,
   generateCi,
   generateNickname,
   generateAccessToken,
   generateRefreshToken,
+  checkToken,
 };
