@@ -4,8 +4,8 @@
   "description": "this is backend repo for form",
   "main": "index.js",
   "scripts": {
-    "start:local": "cross-env NODE_ENV=local node --watch app.js",
-    "start:prod": "cross-env NODE_ENV=prod node app.js",
+    "start:local": "swagger-cli bundle ./src/swagger/swagger.yaml --outfile src/swagger/build/swagger.yaml --type yaml && cross-env NODE_ENV=local node --watch app.js",
+    "start:prod": "swagger-cli bundle ./src/swagger/swagger.yaml --outfile src/swagger/build/swagger.yaml --type yaml && cross-env NODE_ENV=prod node app.js",
     "sync:local": "cross-env NODE_ENV=local node src/utils/sync.js",
     "sync:prod": "cross-env NODE_ENV=prod node src/utils/sync.js"
   },
@@ -35,6 +35,7 @@
     "node-fetch": "^3.3.1",
     "prettier": "^2.8.7",
     "sequelize": "^6.30.0",
+    "swagger-cli": "^4.0.4",
     "swagger-ui-express": "^4.6.2",
     "yamljs": "^0.3.0"
   },

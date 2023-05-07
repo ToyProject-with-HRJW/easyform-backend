@@ -1,0 +1,79 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: easyform
+  description: API documentation based on restful api in easyform project
+  license:
+    name: HRJW
+tags:
+  - name: auth
+    description: Authentication related API
+paths:
+  /auth/token:
+    post:
+      tags:
+        - auth
+      summary: Token issuance through authentication
+      description: Token issuance through authentication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                    - GOOGLE
+                    - KAKAO
+                    - NAVER
+                token:
+                  type: string
+              required:
+                - type
+                - token
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    $ref: '#/components/responses/SUCCESS'
+                  data:
+                    type: object
+                    properties:
+                      accessToken:
+                        type: string
+                      refreshToken:
+                        type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    oneOf:
+                      - $ref: '#/components/responses/MISSING_REQUIRED_QUERY_PRAMETER'
+                      - $ref: '#/components/responses/PRAMETER_VALUE_NOT_SATISFIED'
+                      - $ref: '#/components/responses/SNS_AUTH_FAILED'
+                  data:
+                    type: object
+components:
+  responses:
+    SUCCESS:
+      type: string
+      example: success
+    MISSING_REQUIRED_QUERY_PRAMETER:
+      type: string
+      example: missing required query parameter
+    PRAMETER_VALUE_NOT_SATISFIED:
+      type: string
+      example: parameter value not satisfied
+    SNS_AUTH_FAILED:
+      type: string
+      example: SNS_AUTH_FAILED

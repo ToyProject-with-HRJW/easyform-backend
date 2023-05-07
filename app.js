@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   "/api-docs",
   swaggerUi.serve,
-  swaggerUi.setup(YAML.load("src/swagger/swagger.yaml"))
+  swaggerUi.setup(YAML.load("src/swagger/build/swagger.yaml"))
 );
 
 app.get("/", (req, res) => {
