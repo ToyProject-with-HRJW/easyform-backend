@@ -71,7 +71,7 @@ async function getToken(req, res) {
     res.json(resFormat(SUCCESS, data));
   } catch (err) {
     console.error("err : ", err.toString());
-    res.status(500);
+    res.status(500).end();
   }
 }
 
