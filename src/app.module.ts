@@ -7,9 +7,9 @@ import Joi from 'joi';
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true,
-    envFilePath: process.env.NODE_ENV === 'dev' ? '.env.dev' : '.env.prod',
+    envFilePath: process.env.NODE_ENV === 'local' ? '.env.local' : '.env.prod',
     validationSchema: Joi.object({
-      NODE_ENV: Joi.string().valid('dev', 'prod').required(),
+      NODE_ENV: Joi.string().valid('local', 'prod').required(),
   }), 
 }),],
   controllers: [AppController],
