@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 
 ConfigModule.forRoot({
   isGlobal: true,
-  envFilePath: process.env.NODE_ENV === 'prod' ? '.env.prod' : '.env.local',
+  envFilePath: process.env.NODE_ENV === 'local' ? '.env.local' : '.env.prod',
   validationSchema: Joi.object({
     NODE_ENV: Joi.string().valid('local', 'prod').required(),
     DB_HOST: Joi.string().required(),

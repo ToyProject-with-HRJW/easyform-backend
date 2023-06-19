@@ -1,17 +1,15 @@
 import { DataSource } from 'typeorm';
 import 'src/config/env';
 
-const devDataSource = new DataSource({
+const dataSource = new DataSource({
   type: 'mysql',
   host: process.env.DB_HOST,
   port: Number(process.env.DB_PORT),
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  synchronize: true,
-  logging: true,
-  entities: ['src/**/*.entity.ts'],
-  migrations: ['src/database/migrations/*.ts'],
+  entities: ["dist/src/entity/*.entity.js"], // autoLoadEntities 옵션을 사용 안하면 entities: [] 옵션에 사용할 모든 엔티티를 넣어줘야함
+  migrations: ["dist/src/migrations/*.js"],
 });
 
-export default devDataSource;
+export default dataSource;

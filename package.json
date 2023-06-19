@@ -9,9 +9,10 @@
     "build": "nest build",
     "start:local": "cross-env NODE_ENV=local nest start --watch",
     "start:prod": "cross-env NODE_ENV=prod node dist/main",
-    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --dataSource ./data-source.ts",
-    "migration:create": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:create ./src/database/migrations/Migration",
-    "migration:run:local": "NODE_ENV=local yarn run typeorm  migration:run"
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js ",
+    "migration:create": "typeorm migration:create ./src/database/migrations/Migration",
+    "migration:run:local": "cross-env NODE_ENV=local yarn run typeorm --dataSource ./data-source.ts migration:run",
+    "migration:run:prod": "cross-env NODE_ENV=prod yarn run typeorm --dataSource ./data-source.ts migration:run"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
