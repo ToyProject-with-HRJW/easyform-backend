@@ -1,6 +1,5 @@
 #!/bin/sh
 docker-compose up --build -d &&
 yarn install &&
-yarn start:local
-
-
+yarn migration:run:local &&
+yarn start:local 
