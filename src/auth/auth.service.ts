@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import { enumSocialPlatform } from 'src/config/enums';
 import { uniqueNamesGenerator, adjectives, colors, animals } from 'unique-names-generator';
 import { REFRESH_TOKEN_EXPIRESIN } from 'src/config/constant';
+import { v4 as uuid } from "uuid";
 
 const {AUTH_REFRESH_SECRET_KEY} = process.env;
 
@@ -29,6 +30,7 @@ export class AuthService {
   async register(@Req() email: any, socialPlatform: string) : Promise<User> {
     const randomNickname = uniqueNamesGenerator({ dictionaries: [adjectives, colors, animals] });
     const row = await this.userRepository.save({
+      ci: uuid(),
       email,
       nickname: randomNickname,
       regSocialPlatform: enumSocialPlatform[socialPlatform]

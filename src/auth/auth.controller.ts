@@ -4,7 +4,6 @@ import { AuthGuard } from '@nestjs/passport';
 import { AUTH_SOCIAL_PLATFORM_GOOGLE, AUTH_SOCIAL_PLATFORM_KAKAO, AUTH_SOCIAL_PLATFORM_NAVER } from 'src/config/constant';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
-import querystring from 'querystring';
 
 const {AUTH_LOGIN_CLINET_CALLBACK_URL} = process.env;
 @Controller('auth')
@@ -30,11 +29,9 @@ export class AuthController {
     const access_token = await this.authService.generateAccessToken(checkAccountRow);
     const refresh_token = await this.authService.generateRefreshToken(checkAccountRow);
 
-    const query = querystring.stringify({
-          access_token,
-          refresh_token
-      });
-    return res.redirect(`${AUTH_LOGIN_CLINET_CALLBACK_URL}/?${query}`);
+    res.cookie('access-token', access_token);
+    res.cookie('refresh-token', refresh_token);
+    return res.redirect(`${AUTH_LOGIN_CLINET_CALLBACK_URL}`);
   }
 
   @Get('naver')
@@ -55,11 +52,9 @@ export class AuthController {
     const access_token = await this.authService.generateAccessToken(checkAccountRow);
     const refresh_token = await this.authService.generateRefreshToken(checkAccountRow);
 
-    const query = querystring.stringify({
-          access_token,
-          refresh_token
-      });
-    return res.redirect(`${AUTH_LOGIN_CLINET_CALLBACK_URL}/?${query}`);
+    res.cookie('access-token', access_token);
+    res.cookie('refresh-token', refresh_token);
+    return res.redirect(`${AUTH_LOGIN_CLINET_CALLBACK_URL}`);
   }
 
   @Get('kakao')
@@ -80,11 +75,9 @@ export class AuthController {
     const access_token = await this.authService.generateAccessToken(checkAccountRow);
     const refresh_token = await this.authService.generateRefreshToken(checkAccountRow);
 
-    const query = querystring.stringify({
-          access_token,
-          refresh_token
-      });
-    return res.redirect(`${AUTH_LOGIN_CLINET_CALLBACK_URL}/?${query}`);
+    res.cookie('access-token', access_token);
+    res.cookie('refresh-token', refresh_token);
+    return res.redirect(`${AUTH_LOGIN_CLINET_CALLBACK_URL}`);
   }
  
 }
