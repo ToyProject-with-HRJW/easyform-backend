@@ -18,7 +18,7 @@ export class AuthController {
   googleAuth() {}
 
   @Get('google/redirect')
-  @ApiOperation({ summary: 'google login processing', description: 'google login processing' })
+  @ApiOperation({ summary: 'google login processing - Only Backend', description: 'google login processing' })
   @UseGuards(AuthGuard('google'))
   async googleLoginRedirect(@Req() req: Request, @Res() res: Response): Promise<void> {
     const { user } = req;
@@ -43,7 +43,7 @@ export class AuthController {
   naverAuth() {}
 
   @Get('naver/redirect')
-  @ApiOperation({ summary: 'naver login processing', description: 'naver login processing' })
+  @ApiOperation({ summary: 'naver login processing - Only Backend', description: 'naver login processing' })
   @UseGuards(AuthGuard('naver'))
   async naverLoginRedirect(@Req() req: Request, @Res() res: Response): Promise<void> {
     const { user } = req;
@@ -68,7 +68,7 @@ export class AuthController {
   kakaoAuth() {}
 
   @Get('kakao/redirect')
-  @ApiOperation({ summary: 'kakao login processing', description: 'kakao login processing' })
+  @ApiOperation({ summary: 'kakao login processing - Only Backend', description: 'kakao login processing' })
   @UseGuards(AuthGuard('kakao'))
   async kakaoLoginRedirect(@Req() req: Request, @Res() res: Response): Promise<void> {
     const { user } = req;
