@@ -1,11 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique, OneToOne, JoinColumn } from 'typeorm';
-import { SocialPlatform } from './socialPlatform.entity';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm';
+import { enumSocialPlatform } from 'src/config/enums';
 
 @Entity()
 @Unique(['email', 'nickname'])
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  ci: string;
+  @PrimaryGeneratedColumn('uuid')
+  ci: string
 
   @Column()
   email: string;
@@ -13,10 +13,12 @@ export class User extends BaseEntity {
   @Column()
   nickname: string;
 
-  @OneToOne(() => SocialPlatform)
-  @JoinColumn()
-  SocialPlatformId: SocialPlatform;
-
+  @Column({
+    type: 'enum',
+    enum: enumSocialPlatform
+  })
+  RegSocialPlatform: enumSocialPlatform
+  
   @CreateDateColumn()
   createdAt: Date;
   @UpdateDateColumn()
