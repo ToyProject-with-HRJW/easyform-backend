@@ -1,13 +1,15 @@
-import { Controller, Get, Res } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
-import { ApiResponse } from './interface/response.interface';
+import {ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller()
+@ApiTags()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  liveness() : ApiResponse<undefined> {
+  @ApiOperation({ summary: 'liveness API', description: 'Check the server is alive' })
+  liveness() : object {
     return {
       message: this.appService.liveness(),
     }
