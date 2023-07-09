@@ -17,7 +17,7 @@ export class User extends BaseEntity {
     type: 'enum',
     enum: enumSocialPlatform
   })
-  RegSocialPlatform: enumSocialPlatform
+  regSocialPlatform: enumSocialPlatform
   
   @CreateDateColumn()
   createdAt: Date;
