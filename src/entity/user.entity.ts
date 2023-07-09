@@ -1,10 +1,10 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Unique } from 'typeorm';
+import { BaseEntity, Column, Entity, CreateDateColumn, UpdateDateColumn, Unique, PrimaryColumn } from 'typeorm';
 import { enumSocialPlatform } from 'src/config/enums';
 
 @Entity()
 @Unique(['email', 'nickname'])
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   ci: string
 
   @Column()
